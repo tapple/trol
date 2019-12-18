@@ -786,7 +786,8 @@ class List(Collection):
         Push the value into the list from the *left* side
 
         :param values: a list of values or single value to push
-        :rtype: long representing the number of values pushed.
+        :rtype: long representing the size of the list,
+            unless values is empty, in which case, 0
 
         >>> l = trol.List('test', redis)
         >>> l.lpush(['a', 'b'])
@@ -794,6 +795,8 @@ class List(Collection):
         >>> l.clear()
 
         """
+        if not values:
+            return 0
         values = [self.serialize(v) for v in _parse_values(values)]
         return self.redis.lpush(self.key, *values)
 
@@ -802,7 +805,8 @@ class List(Collection):
         Push the value into the list from the *right* side
 
         :param values: a list of values or single value to push
-        :rtype: long representing the size of the list.
+        :rtype: long representing the size of the list,
+            unless values is empty, in which case, 0
 
         >>> l = trol.List('test', redis)
         >>> l.lpush(['a', 'b'])
@@ -815,6 +819,8 @@ class List(Collection):
 
         """
 
+        if not values:
+            return 0
         values = [self.serialize(v) for v in _parse_values(values)]
         return self.redis.rpush(self.key, *values)
 
