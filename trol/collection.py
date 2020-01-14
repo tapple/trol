@@ -1569,8 +1569,8 @@ class Hash(Collection, collections.MutableMapping):
     keys = hkeys
     values = hvals
     _get_dict = hgetall
-    __setitem__ = hset
     get = hget
+    __setitem__ = hset
     __delitem__ = hdel
     __len__ = hlen
     __contains__ = hexists
